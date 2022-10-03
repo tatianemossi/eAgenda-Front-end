@@ -5,8 +5,8 @@ import { Title } from '@angular/platform-browser';
   selector: 'app-root',
   template: `
   <app-navbar></app-navbar>
-  <h1>Olá mundo!</h1>
-  `
+  <router-outlet></router-outlet>
+`
 })
 export class AppComponent {
   title = 'front-end';
