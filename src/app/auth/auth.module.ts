@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { LocalStorageService } from './services/local-storage.service';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './services/auth.guard';
+import { LoginGuard } from './services/login.guard';
 
 
 
@@ -17,8 +19,6 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     RouterModule
   ],
-  providers: [
-    AuthService, LocalStorageService
-  ],
+  providers: [AuthService, LocalStorageService, AuthGuard, LoginGuard],
 })
 export class AuthModule { }
