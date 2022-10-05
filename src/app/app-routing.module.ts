@@ -13,8 +13,13 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import ('./dashboard/dashboard.module')
-    .then(m => m.DashboardModule),
+      .then(m => m.DashboardModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'tarefas',
+    loadChildren: () => import('./tarefas/tarefa.module')
+      .then(m => m.TarefaModule)
   }
 ];
 
