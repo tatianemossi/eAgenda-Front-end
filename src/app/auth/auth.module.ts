@@ -6,11 +6,12 @@ import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { LocalStorageService } from './services/local-storage.service';
 import { RouterModule } from '@angular/router';
+import { LoginComponent } from './login/login.component';
 
 
 
 @NgModule({
-  declarations: [RegistroComponent],
+  declarations: [RegistroComponent, LoginComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
