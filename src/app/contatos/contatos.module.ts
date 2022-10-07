@@ -10,13 +10,15 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ContatoService } from './services/contato.service';
 import { FormsContatoResolver } from './services/forms-contato.resolver';
 import { VisualizarContatoResolver } from './services/visualizar-contato.resolver';
+import { EditarContatoComponent } from './editar/editar-contato.component';
 
 
 @NgModule({
   declarations: [
     InserirContatoComponent,
     ContatoAppComponent,
-    ListarContatoComponent
+    ListarContatoComponent,
+    EditarContatoComponent
   ],
   imports: [
     CommonModule,

@@ -14,7 +14,6 @@ import { StatusItemTarefaEnum } from '../view-models/status-item-tarefa.enum';
   ]
 })
 export class EditarTarefaComponent implements OnInit {
-
   public formTarefa: FormGroup;
   public formItens: FormGroup;
   public prioridades = Object.values(PrioridadeTarefaEnum).filter(v => !Number.isFinite(v));
