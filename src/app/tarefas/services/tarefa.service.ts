@@ -5,6 +5,7 @@ import { LocalStorageService } from "src/app/auth/services/local-storage.service
 import { environment } from "src/environments/environment";
 import { FormsTarefaViewModel } from "../view-models/forms-tarefa.view-model";
 import { ListarTarefaViewModel } from "../view-models/listar-tarefa.view-model";
+import { VisualizarTarefaViewModel } from "../view-models/visualizar-tarefa.view-model";
 
 @Injectable()
 export class TarefaService {
@@ -55,13 +56,13 @@ export class TarefaService {
     return resposta;
   }
 
-  // public selecionarTarefaCompletaPorId(id: string): Observable<VisualizarTarefaViewModel> {
-  //   const resposta = this.http
-  //     .get<VisualizarTarefaViewModel>(this.apiUrl + 'tarefas/visualizacao-completa/' + id, this.obterHeadersAutorizacao())
-  //     .pipe(map(this.processarDados), catchError(this.processarFalha));
+  public selecionarTarefaCompletaPorId(id: string): Observable<VisualizarTarefaViewModel> {
+    const resposta = this.http
+      .get<VisualizarTarefaViewModel>(this.apiUrl + 'tarefas/visualizacao-completa/' + id, this.obterHeadersAutorizacao())
+      .pipe(map(this.processarDados), catchError(this.processarFalha));
 
-  //   return resposta;
-  // }
+    return resposta;
+  }
 
   private obterHeadersAutorizacao() {
     const token = this.localStorageService.obterTokenUsuario();
@@ -75,8 +76,10 @@ export class TarefaService {
   }
 
   private processarDados(resposta: any) {
-    if (resposta.sucesso)
+    if (resposta?.sucesso)
       return resposta.dados;
+    else
+      return resposta;
   }
 
   private processarFalha(resposta: any) {
