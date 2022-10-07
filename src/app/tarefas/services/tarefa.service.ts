@@ -23,6 +23,22 @@ export class TarefaService {
     return resposta;
   }
 
+  public editar(tarefa: FormsTarefaViewModel): Observable<FormsTarefaViewModel> {
+    const resposta = this.http
+      .put<FormsTarefaViewModel>(this.apiUrl + 'tarefas/' + tarefa.id, tarefa, this.obterHeadersAutorizacao())
+      .pipe(map(this.processarDados), catchError(this.processarFalha));
+
+    return resposta;
+  }
+
+  public excluir(id: string): Observable<string> {
+    const resposta = this.http
+      .delete<string>(this.apiUrl + 'tarefas/' + id, this.obterHeadersAutorizacao())
+      .pipe(map(this.processarDados), catchError(this.processarFalha));
+
+    return resposta;
+  }
+
   public selecionarTodos(): Observable<ListarTarefaViewModel[]> {
     const resposta = this.http
       .get<ListarTarefaViewModel[]>(this.apiUrl + 'tarefas', this.obterHeadersAutorizacao())
@@ -30,6 +46,22 @@ export class TarefaService {
 
     return resposta;
   }
+
+  public selecionarPorId(id: string): Observable<FormsTarefaViewModel> {
+    const resposta = this.http
+      .get<FormsTarefaViewModel>(this.apiUrl + 'tarefas/' + id, this.obterHeadersAutorizacao())
+      .pipe(map(this.processarDados), catchError(this.processarFalha));
+
+    return resposta;
+  }
+
+  // public selecionarTarefaCompletaPorId(id: string): Observable<VisualizarTarefaViewModel> {
+  //   const resposta = this.http
+  //     .get<VisualizarTarefaViewModel>(this.apiUrl + 'tarefas/visualizacao-completa/' + id, this.obterHeadersAutorizacao())
+  //     .pipe(map(this.processarDados), catchError(this.processarFalha));
+
+  //   return resposta;
+  // }
 
   private obterHeadersAutorizacao() {
     const token = this.localStorageService.obterTokenUsuario();
