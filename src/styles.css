@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Mali:wght@400;600;700&family=Poppins:wght@200&display=swap');
+
+* {
+  font-family: 'Mali', sans-serif;
+}
+
 .bg-grey {
   background-color: #f3f3f3 !important;
 }
@@ -10,10 +16,27 @@
   font-size: 18px;
 }
 
-.nav-link {
-  transition: all 100ms ease-in-out;
+.nav-link:hover{
+  color: #04303d !important;
+  transition: .3s ease-in-out;
 }
 
-.nav-link:hover{
-  color: #093679 !important;
+.text-primary {
+  color: #3b9e9ea9 !important;
+}
+
+.btn-primary {
+  background-color: #3b9e9ea9 !important;
+  border-color: #3b9e9ea9 !important;
+}
+
+.btn-outline-primary {
+  color: #3b9e9ea9 !important;
+  border-color: #3b9e9ea9 !important;
+}
+
+.btn-outline-primary:hover {
+  color: #ffff !important;
+  border-color: #3b9e9ea9 !important;
+  background-color: #3b9e9ea9;
 }
