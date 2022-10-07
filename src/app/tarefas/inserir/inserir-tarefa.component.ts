@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { TarefaService } from '../services/tarefa.service';
 import { FormsTarefaViewModel, ItemTarefaViewModel } from '../view-models/forms-tarefa.view-model';
 import { PrioridadeTarefaEnum } from '../view-models/prioridade.tarefa.enum';
-import { StatusItemTarefa } from '../view-models/status-item-tarefa.enum';
+import { StatusItemTarefaEnum } from '../view-models/status-item-tarefa.enum';
 
 @Component({
   selector: 'app-inserir-tarefa',
@@ -55,7 +55,7 @@ export class InserirTarefaComponent implements OnInit {
     if (this.tituloItem) {
       let item = new ItemTarefaViewModel();
       item.titulo = this.tituloItem.value;
-      item.status = StatusItemTarefa.Adicionado;
+      item.status = StatusItemTarefaEnum.Adicionado;
 
       this.tarefaFormVM.itens.push(item);
 

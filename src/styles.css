@@ -30,6 +30,11 @@
   border-color: #3b9e9ea9 !important;
 }
 
+.btn-primary:hover{
+  background-color: #31c7c7a9 !important;
+  border-color: #3b9e9ea9 !important;
+  transition: .3s ease-in-out;
+}
 .btn-outline-primary {
   color: #3b9e9ea9 !important;
   border-color: #3b9e9ea9 !important;

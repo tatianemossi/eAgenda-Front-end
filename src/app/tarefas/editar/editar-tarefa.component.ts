@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TarefaService } from '../services/tarefa.service';
 import { FormsTarefaViewModel, ItemTarefaViewModel } from '../view-models/forms-tarefa.view-model';
 import { PrioridadeTarefaEnum } from '../view-models/prioridade.tarefa.enum';
-import { StatusItemTarefa } from '../view-models/status-item-tarefa.enum';
+import { StatusItemTarefaEnum } from '../view-models/status-item-tarefa.enum';
 
 @Component({
   selector: 'app-editar-tarefa',
@@ -64,14 +64,14 @@ export class EditarTarefaComponent implements OnInit {
 
   get itens(): ItemTarefaViewModel[] {
     return this.tarefaFormVM.itens
-      .filter(a => a.status !== StatusItemTarefa.Removido);
+      .filter(a => a.status !== StatusItemTarefaEnum.Removido);
   }
 
   public adicionarItem(): void {
     if (this.tituloItem) {
       let item = new ItemTarefaViewModel();
       item.titulo = this.tituloItem.value;
-      item.status = StatusItemTarefa.Adicionado;
+      item.status = StatusItemTarefaEnum.Adicionado;
 
       this.tarefaFormVM.itens.push(item);
 
@@ -83,7 +83,7 @@ export class EditarTarefaComponent implements OnInit {
     if (item) {
       this.tarefaFormVM.itens.forEach((x, index) => {
         if (x === item)
-          item.status = StatusItemTarefa.Removido;
+          item.status = StatusItemTarefaEnum.Removido;
       });
     }
   }

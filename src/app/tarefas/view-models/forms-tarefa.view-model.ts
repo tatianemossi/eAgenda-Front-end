@@ -1,5 +1,5 @@
 import { PrioridadeTarefaEnum } from "./prioridade.tarefa.enum";
-import { StatusItemTarefa } from "./status-item-tarefa.enum";
+import { StatusItemTarefaEnum } from "./status-item-tarefa.enum";
 
 export class FormsTarefaViewModel {
   id: string;
@@ -11,6 +11,6 @@ export class FormsTarefaViewModel {
 export class ItemTarefaViewModel {
   id: string;
   titulo: string;
-  status: StatusItemTarefa;
+  status: StatusItemTarefaEnum;
   concluido: boolean;
 }
