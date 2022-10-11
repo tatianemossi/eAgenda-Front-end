@@ -11,6 +11,7 @@ import { ContatoService } from './services/contato.service';
 import { FormsContatoResolver } from './services/forms-contato.resolver';
 import { VisualizarContatoResolver } from './services/visualizar-contato.resolver';
 import { EditarContatoComponent } from './editar/editar-contato.component';
+import { ExcluirContatoComponent } from './excluir/excluir-contato/excluir-contato.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { EditarContatoComponent } from './editar/editar-contato.component';
     InserirContatoComponent,
     ContatoAppComponent,
     ListarContatoComponent,
-    EditarContatoComponent
+    EditarContatoComponent,
+    ExcluirContatoComponent
   ],
   imports: [
     CommonModule,
