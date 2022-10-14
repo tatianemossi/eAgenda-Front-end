@@ -45,3 +45,11 @@
   border-color: #3b9e9ea9 !important;
   background-color: #3b9e9ea9;
 }
+
+.disabledInput {
+  background-color: #dddddd !important;
+}
+
+.disabledInput::selection {
+  background-color: #dddddd;
+}

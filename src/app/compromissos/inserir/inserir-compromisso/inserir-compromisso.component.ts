@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CompromissoService } from '../../services/compromisso.service';
@@ -19,12 +19,7 @@ export class InserirCompromissoComponent implements OnInit {
 
   public compromissoFormVM: FormsCompromissoViewModel = new FormsCompromissoViewModel();
 
-  constructor(
-    titulo: Title,
-    private formBuilder: FormBuilder,
-    private compromissoService: CompromissoService,
-    private router: Router
-  ) {
+  constructor(titulo: Title, private formBuilder: FormBuilder, private compromissoService: CompromissoService, private router: Router) {
     titulo.setTitle('Cadastrar Comrpomisso - eAgenda');
   }
 
@@ -38,7 +33,6 @@ export class InserirCompromissoComponent implements OnInit {
       horaInicio: ['', Validators.required],
       horaTermino: ['', Validators.required]
     });
-
   }
 
   get assunto() {
@@ -89,5 +83,10 @@ export class InserirCompromissoComponent implements OnInit {
     if (erro) {
       console.error(erro);
     }
+  }
+
+  public limparCamposLinkELocal(): void {
+    this.formCompromisso.controls['link'].reset();
+    this.formCompromisso.controls['local'].reset();
   }
 }

@@ -3,21 +3,16 @@
     <div class="col-12 col-md-10 col-lg-6 mx-auto mt-5">
       <div class="text-md-start">
         <h1 class="fw-bold text-primary">
-            Inserir Novo Compromisso
-          </h1>
+          Inserir Novo Compromisso
+        </h1>
         <hr />
       </div>
 
       <form [formGroup]="formCompromisso" class="mt-4">
         <div class="form-group mb-3 position-relative">
           <label class="form-label">Assunto:</label>
-          <input
-            [ngClass]="assunto?.touched && assunto?.invalid ? 'is-invalid' : ''"
-            formControlName="assunto"
-            class="form-control"
-            type="text"
-            placeholder="Digite o assunto do compromisso"
-          />
+          <input [ngClass]="assunto?.touched && assunto?.invalid ? 'is-invalid' : ''" formControlName="assunto"
+            class="form-control" type="text" placeholder="Digite o assunto do compromisso" />
           <div class="invalid-tooltip" *ngIf="assunto?.touched && assunto?.invalid">
             <span *ngIf="assunto?.errors?.['required']">O assunto precisa ser preenchido.</span>
             <span *ngIf="assunto?.errors?.['minlength']">O assunto deve ter no mínimo 3 caracteres.</span>
@@ -26,11 +21,10 @@
 
         <div class="form-group mb-3 position-relative">
           <label class="form-label">Tipo de Local:</label>
-          <ng-select
-            [ngClass]="tipoLocal?.touched && tipoLocal?.invalid ? 'is-invalid' : ''"
-            formControlName="tipoLocal" [clearable]="false" [searchable]="false">
-            <ng-option *ngFor="let tipoLocal of tiposLocal ; index as i" [value]="i" >
-                {{tipoLocal}}
+          <ng-select [ngClass]="tipoLocal?.touched && tipoLocal?.invalid ? 'is-invalid' : ''"
+            formControlName="tipoLocal" [clearable]="false" [searchable]="false" (change)="limparCamposLinkELocal()">
+            <ng-option *ngFor="let tipoLocal of tiposLocal ; index as i" [value]="i">
+              {{tipoLocal}}
             </ng-option>
           </ng-select>
           <div class="invalid-tooltip" *ngIf="tipoLocal?.touched && tipoLocal?.invalid">
@@ -38,87 +32,64 @@
           </div>
         </div>
 
-          <div class="form-group mb-3 position-relative">
-            <label class="form-label">Link:</label>
-            <input
-              [ngClass]="link?.touched && link?.invalid ? 'is-invalid' : ''"
-              formControlName="link"
-              class="form-control"
-              type="text"
-              placeholder="Digite o link do compromisso"
-            />
-            <div class="invalid-tooltip" *ngIf="link?.touched && link?.invalid">
-              <span *ngIf="link?.errors?.['required']">O link precisa ser preenchido.</span>
-              <span *ngIf="link?.errors?.['minlength']">O link deve ter no mínimo 3 caracteres.</span>
-            </div>
+        <div class="form-group mb-3 position-relative">
+          <label class="form-label">Link:</label>
+          <input [ngClass]="link?.touched && link?.invalid ? 'is-invalid' : ''" formControlName="link"
+            class="form-control" type="text" placeholder="Digite o link do compromisso"
+            [readonly]="tipoLocal?.value == '1'"
+            [ngClass]="tipoLocal?.value == '1' ? 'disabledInput' : ''"/>
+          <div class="invalid-tooltip" *ngIf="link?.touched && link?.invalid">
+            <span *ngIf="link?.errors?.['required']">O link precisa ser preenchido.</span>
+            <span *ngIf="link?.errors?.['minlength']">O link deve ter no mínimo 3 caracteres.</span>
           </div>
+        </div>
 
-          <div class="form-group mb-3 position-relative">
-            <label class="form-label">Local:</label>
-            <input
-              [ngClass]="local?.touched && local?.invalid ? 'is-invalid' : ''"
-              formControlName="local"
-              class="form-control"
-              type="text"
-              placeholder="Digite o local do compromisso"
-            />
-            <div class="invalid-tooltip" *ngIf="local?.touched && local?.invalid">
-              <span *ngIf="local?.errors?.['required']">O local precisa ser preenchido.</span>
-              <span *ngIf="local?.errors?.['minlength']">O local deve ter no mínimo 3 caracteres.</span>
-            </div>
+        <div class="form-group mb-3 position-relative">
+          <label class="form-label">Local:</label>
+          <input [ngClass]="local?.touched && local?.invalid ? 'is-invalid' : ''" formControlName="local"
+            class="form-control" type="text" placeholder="Digite o local do compromisso"
+            [readonly]="tipoLocal?.value == '0'"
+            [ngClass]="tipoLocal?.value == '0' ? 'disabledInput' : ''"/>
+          <div class="invalid-tooltip" *ngIf="local?.touched && local?.invalid">
+            <span *ngIf="local?.errors?.['required']">O local precisa ser preenchido.</span>
+            <span *ngIf="local?.errors?.['minlength']">O local deve ter no mínimo 3 caracteres.</span>
           </div>
+        </div>
 
-          <div class="form-group mb-3 position-relative">
-            <label class="form-label">Data:</label>
-            <input
-              [ngClass]="data?.touched && data?.invalid ? 'is-invalid' : ''"
-              formControlName="data"
-              class="form-control"
-              type="date"
-              placeholder="Digite a data do compromisso"
-            />
-            <div class="invalid-tooltip" *ngIf="data?.touched && data?.invalid">
-              <span *ngIf="data?.errors?.['required']">A data precisa ser preenchida.</span>
-            </div>
+        <div class="form-group mb-3 position-relative">
+          <label class="form-label">Data:</label>
+          <input [ngClass]="data?.touched && data?.invalid ? 'is-invalid' : ''" formControlName="data"
+            class="form-control" type="date" placeholder="Digite a data do compromisso" />
+          <div class="invalid-tooltip" *ngIf="data?.touched && data?.invalid">
+            <span *ngIf="data?.errors?.['required']">A data precisa ser preenchida.</span>
           </div>
+        </div>
 
-          <div class="form-group mb-3 position-relative">
-            <label class="form-label">Horário de Início:</label>
-            <input
-              [ngClass]="horaInicio?.touched && horaInicio?.invalid ? 'is-invalid' : ''"
-              formControlName="horaInicio"
-              class="form-control"
-              type="time"
-              placeholder="Digite o horário de início do compromisso"
-            />
-            <div class="invalid-tooltip" *ngIf="horaInicio?.touched && horaInicio?.invalid">
-              <span *ngIf="horaInicio?.errors?.['required']">O horário de início precisa ser preenchido.</span>
-            </div>
+        <div class="form-group mb-3 position-relative">
+          <label class="form-label">Horário de Início:</label>
+          <input [ngClass]="horaInicio?.touched && horaInicio?.invalid ? 'is-invalid' : ''" formControlName="horaInicio"
+            class="form-control" type="datetime" placeholder="Digite o horário de início do compromisso" />
+          <div class="invalid-tooltip" *ngIf="horaInicio?.touched && horaInicio?.invalid">
+            <span *ngIf="horaInicio?.errors?.['required']">O horário de início precisa ser preenchido.</span>
           </div>
+        </div>
 
-          <div class="form-group mb-3 position-relative">
-            <label class="form-label">Horário Final:</label>
-            <input
-              [ngClass]="horaTermino?.touched && data?.invalid ? 'is-invalid' : ''"
-              formControlName="horaTermino"
-              class="form-control"
-              type="time"
-              placeholder="Digite o horário final do compromisso"
-            />
-            <div class="invalid-tooltip" *ngIf="horaTermino?.touched && horaTermino?.invalid">
-              <span *ngIf="horaTermino?.errors?.['required']">O horário final precisa ser preenchida.</span>
-            </div>
+        <div class="form-group mb-3 position-relative">
+          <label class="form-label">Horário Final:</label>
+          <input [ngClass]="horaTermino?.touched && data?.invalid ? 'is-invalid' : ''" formControlName="horaTermino"
+            class="form-control" type="datetime" placeholder="Digite o horário final do compromisso" />
+          <div class="invalid-tooltip" *ngIf="horaTermino?.touched && horaTermino?.invalid">
+            <span *ngIf="horaTermino?.errors?.['required']">O horário final precisa ser preenchida.</span>
           </div>
+        </div>
 
 
         <div class="card-footer g-grid d-flex gap-1 mt-5">
-          <button (click)="gravar()"
-            type="button" class="btn btn-primary px-5">
+          <button (click)="gravar()" type="button" class="btn btn-primary px-5">
             <i class="pi pi-save me-2"></i>
             Gravar
           </button>
-          <button routerLink="/tarefas/listar"
-            type="button" class="btn btn-outline-primary px-5">
+          <button routerLink="/compromissos/listar" type="button" class="btn btn-outline-primary px-5">
             <i class="pi pi-arrow-left me-2"></i>
             Voltar
           </button>
