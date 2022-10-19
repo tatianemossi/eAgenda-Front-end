@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ContatoService } from '../contatos/services/contato.service';
 import { EditarCompromissoComponent } from './editar/editar-compromisso.component';
+import { ExcluirCompromissoComponent } from './excluir/excluir-compromisso.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { EditarCompromissoComponent } from './editar/editar-compromisso.componen
     CompromissoAppComponent,
     ListarCompromissoComponent,
     InserirCompromissoComponent,
-    EditarCompromissoComponent
+    EditarCompromissoComponent,
+    ExcluirCompromissoComponent
   ],
   imports: [
     CommonModule,
