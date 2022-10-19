@@ -86,5 +86,4 @@ export class EditarContatoComponent implements OnInit {
   private processarFalha(erro: any) {
     console.log(erro);
   }
-
 }
