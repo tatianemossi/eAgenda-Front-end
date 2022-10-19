@@ -1,22 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ContatoService } from 'src/app/contatos/services/contato.service';
 import { ListarContatoViewModel } from 'src/app/contatos/view-models/listar-contato.view-model';
-import { CompromissoService } from '../../services/compromisso.service';
-import { FormsCompromissoViewModel } from '../../view-models/forms-compromisso-view-model';
-import { TipoLocalCompromissoEnum } from '../../view-models/tipoLocalCompromissoEnum';
+import { CompromissoService } from '../services/compromisso.service';
+import { FormsCompromissoViewModel } from '../view-models/forms-compromisso-view-model';
+import { TipoLocalCompromissoEnum } from '../view-models/tipoLocalCompromissoEnum';
 
 @Component({
-  selector: 'app-inserir-compromisso',
-  templateUrl: './inserir-compromisso.component.html',
+  selector: 'app-editar-compromisso',
+  templateUrl: './editar-compromisso.component.html',
   styles: [
   ]
 })
-export class InserirCompromissoComponent implements OnInit {
+export class EditarCompromissoComponent implements OnInit {
   public formCompromisso: FormGroup;
+
   public tiposLocal = Object.values(TipoLocalCompromissoEnum)
     .filter(v => !Number.isFinite(v));
 
@@ -26,16 +27,19 @@ export class InserirCompromissoComponent implements OnInit {
 
   constructor(
     titulo: Title,
-    private formBuilder: FormBuilder,
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
     private compromissoService: CompromissoService,
-    private contatoService: ContatoService,
-    private router: Router) {
-
-    titulo.setTitle('Cadastrar Comrpomisso - eAgenda');
+    private contatoService: ContatoService
+  ) {
+    titulo.setTitle('Editar Compromisso - eAgenda');
   }
 
   ngOnInit(): void {
-    this.formCompromisso = this.formBuilder.group({
+    this.compromissoFormVM = this.route.snapshot.data['compromisso'];
+
+    this.formCompromisso = this.fb.group({
       assunto: ['', [Validators.required, Validators.minLength(3)]],
       tipoLocal: ['', [Validators.required]],
       link: ['', Validators.minLength(3)],
@@ -48,6 +52,19 @@ export class InserirCompromissoComponent implements OnInit {
     });
 
     this.contatos$ = this.contatoService.selecionarTodos();
+
+    this.formCompromisso.patchValue({
+      id: this.compromissoFormVM.id,
+      assunto: this.compromissoFormVM.assunto,
+      tipoLocal: this.compromissoFormVM.tipoLocal,
+      link: this.compromissoFormVM.link,
+      local: this.compromissoFormVM.local,
+      data: this.compromissoFormVM.data,
+      horaInicio: this.compromissoFormVM.horaInicio,
+      horaTermino: this.compromissoFormVM.horaTermino,
+      contato: this.compromissoFormVM.contato,
+      contatoId: this.compromissoFormVM.contatoId
+    });
   }
 
   get assunto() {
@@ -79,7 +96,7 @@ export class InserirCompromissoComponent implements OnInit {
   }
 
   get contatoId() {
-    return this.formCompromisso.get('contato');
+    return this.formCompromisso.get('contatoId');
   }
 
   public gravar() {
@@ -87,21 +104,19 @@ export class InserirCompromissoComponent implements OnInit {
 
     this.compromissoFormVM = Object.assign({}, this.compromissoFormVM, this.formCompromisso.value);
 
-    this.compromissoService.inserir(this.compromissoFormVM)
+    this.compromissoService.editar(this.compromissoFormVM)
       .subscribe({
-        next: (compromissoInserido) => this.processarSucesso(compromissoInserido),
+        next: (compromissoEditado) => this.processarSucesso(compromissoEditado),
         error: (erro) => this.processarFalha(erro)
-      })
+      });
   }
 
-  private processarSucesso(compromisso: FormsCompromissoViewModel): void {
+  private processarSucesso(compromisso: FormsCompromissoViewModel) {
     this.router.navigate(['/compromissos/listar']);
   }
 
   private processarFalha(erro: any) {
-    if (erro) {
-      console.error(erro);
-    }
+    console.log(erro);
   }
 
   public limparCamposLinkELocal(): void {

@@ -11,13 +11,15 @@ import { VisualizarCompromissoResolver } from './services/visualizar-compromisso
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ContatoService } from '../contatos/services/contato.service';
+import { EditarCompromissoComponent } from './editar/editar-compromisso.component';
 
 
 @NgModule({
   declarations: [
     CompromissoAppComponent,
     ListarCompromissoComponent,
-    InserirCompromissoComponent
+    InserirCompromissoComponent,
+    EditarCompromissoComponent
   ],
   imports: [
     CommonModule,
