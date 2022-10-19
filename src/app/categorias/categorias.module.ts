@@ -11,6 +11,7 @@ import { CategoriaService } from './services/categoria.service';
 import { FormsCategoriaResolver } from './services/forms-categoria.resolver';
 import { VisualizarCategoriaResolver } from './services/visualizar-categoria.resolver';
 import { EditarCategoriaComponent } from './editar/editar-categoria.component';
+import { ExcluirCategoriaComponent } from './excluir/excluir-categoria.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { EditarCategoriaComponent } from './editar/editar-categoria.component';
     CategoriaAppComponent,
     ListarCategoriaComponent,
     InserirCategoriaComponent,
-    EditarCategoriaComponent
+    EditarCategoriaComponent,
+    ExcluirCategoriaComponent
   ],
   imports: [
     CommonModule,

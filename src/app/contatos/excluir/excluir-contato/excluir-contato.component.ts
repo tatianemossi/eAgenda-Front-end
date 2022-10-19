@@ -11,7 +11,6 @@ import { VisualizarContatoViewModel } from '../../view-models/visualizar-contato
   ]
 })
 export class ExcluirContatoComponent implements OnInit {
-
   public contatoFormVM: VisualizarContatoViewModel = new VisualizarContatoViewModel();
 
   constructor(
