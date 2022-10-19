@@ -31,7 +31,7 @@ export class InserirCompromissoComponent implements OnInit {
     private contatoService: ContatoService,
     private router: Router) {
 
-    titulo.setTitle('Cadastrar Comrpomisso - eAgenda');
+    titulo.setTitle('Cadastrar Compromisso - eAgenda');
   }
 
   ngOnInit(): void {

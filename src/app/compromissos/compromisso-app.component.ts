@@ -4,5 +4,5 @@ import { Component } from '@angular/core';
   selector: 'app-compromisso-app',
   template: `
     <router-outlet></router-outlet>`
-  })
+})
 export class CompromissoAppComponent { }
