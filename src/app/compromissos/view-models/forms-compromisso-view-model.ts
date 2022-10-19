@@ -11,5 +11,5 @@ export class FormsCompromissoViewModel {
   horaInicio: Date;
   horaTermino: Date;
 
-  contato: VisualizarContatoViewModel;
+  contatoId: VisualizarContatoViewModel;
 }

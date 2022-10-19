@@ -11,5 +11,5 @@ export class VisualizarCompromissoViewModel {
   horaInicio: Date;
   horaTermino: Date;
 
-  contato: VisualizarContatoViewModel;
+  contatoId: VisualizarContatoViewModel;
 }

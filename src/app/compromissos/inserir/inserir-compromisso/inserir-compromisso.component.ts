@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { ContatoService } from 'src/app/contatos/services/contato.service';
+import { ListarContatoViewModel } from 'src/app/contatos/view-models/listar-contato.view-model';
 import { CompromissoService } from '../../services/compromisso.service';
 import { FormsCompromissoViewModel } from '../../view-models/forms-compromisso-view-model';
 import { TipoLocalCompromissoEnum } from '../../view-models/tipoLocalCompromissoEnum';
@@ -17,9 +20,19 @@ export class InserirCompromissoComponent implements OnInit {
   public tiposLocal = Object.values(TipoLocalCompromissoEnum)
     .filter(v => !Number.isFinite(v));
 
+    public contatos$: Observable<ListarContatoViewModel[]>;
+  // public contatos = Object.values(FormsContatoViewModel)
+  //   .filter(v => !Number.isFinite(v));
+
   public compromissoFormVM: FormsCompromissoViewModel = new FormsCompromissoViewModel();
 
-  constructor(titulo: Title, private formBuilder: FormBuilder, private compromissoService: CompromissoService, private router: Router) {
+  constructor(
+    titulo: Title,
+    private formBuilder: FormBuilder,
+    private compromissoService: CompromissoService,
+    private contatoService: ContatoService,
+    private router: Router) {
+
     titulo.setTitle('Cadastrar Comrpomisso - eAgenda');
   }
 
@@ -31,8 +44,12 @@ export class InserirCompromissoComponent implements OnInit {
       local: ['', Validators.minLength(3)],
       data: ['', Validators.required],
       horaInicio: ['', Validators.required],
-      horaTermino: ['', Validators.required]
+      horaTermino: ['', Validators.required],
+      contato: [''],
+      contatoId: ['', Validators.required]
     });
+
+    this.contatos$ = this.contatoService.selecionarTodos();
   }
 
   get assunto() {
@@ -61,6 +78,10 @@ export class InserirCompromissoComponent implements OnInit {
 
   get horaTermino() {
     return this.formCompromisso.get('horaTermino');
+  }
+
+  get contatoId() {
+    return this.formCompromisso.get('contato');
   }
 
   public gravar() {

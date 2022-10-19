@@ -1,8 +1,10 @@
-import { TipoLocalCompromissoEnum } from "./tipoLocalCompromissoEnum";
+import { Time } from "@angular/common";
 
 export class ListarCompromissoViewModel {
   id: string;
   assunto: string;
-  tipoLocal: TipoLocalCompromissoEnum;
   data: Date;
+  horaInicio: Time;
+  horaTermino: Time;
+  nomeContato: string;
 }

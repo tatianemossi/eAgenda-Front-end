@@ -21,7 +21,6 @@ export class AppComponent {
     this.logarUsuarioPersistido();
   }
 
-
   private logarUsuarioPersistido() {
     const usuarioPersistido = this.localStorageService.obterUsuarioLogado();
 

@@ -68,7 +68,7 @@
         <div class="form-group mb-3 position-relative">
           <label class="form-label">Horário de Início:</label>
           <input [ngClass]="horaInicio?.touched && horaInicio?.invalid ? 'is-invalid' : ''" formControlName="horaInicio"
-            class="form-control" type="datetime" placeholder="Digite o horário de início do compromisso" />
+            class="form-control" type="time" placeholder="Digite o horário de início do compromisso" />
           <div class="invalid-tooltip" *ngIf="horaInicio?.touched && horaInicio?.invalid">
             <span *ngIf="horaInicio?.errors?.['required']">O horário de início precisa ser preenchido.</span>
           </div>
@@ -76,10 +76,40 @@
 
         <div class="form-group mb-3 position-relative">
           <label class="form-label">Horário Final:</label>
-          <input [ngClass]="horaTermino?.touched && data?.invalid ? 'is-invalid' : ''" formControlName="horaTermino"
-            class="form-control" type="datetime" placeholder="Digite o horário final do compromisso" />
+          <input [ngClass]="horaTermino?.touched && horaTermino?.invalid ? 'is-invalid' : ''" formControlName="horaTermino"
+            class="form-control" type="time" placeholder="Digite o horário final do compromisso" />
           <div class="invalid-tooltip" *ngIf="horaTermino?.touched && horaTermino?.invalid">
             <span *ngIf="horaTermino?.errors?.['required']">O horário final precisa ser preenchida.</span>
+          </div>
+        </div>
+
+        <!-- <div class="form-group mb-3 position-relative">
+          <label class="form-label">Contato:</label>
+          <ng-select [ngClass]="contato?.touched && contato?.invalid ? 'is-invalid' : ''"
+            formControlName="contato" [clearable]="false" [searchable]="false" (change)="limparCamposLinkELocal()">
+            <ng-option *ngFor="let contato of contatos ; index as i" [value]="i">
+              {{contato}}
+            </ng-option>
+          </ng-select>
+          <div class="invalid-tooltip" *ngIf="contato?.touched && contato?.invalid">
+            <span *ngIf="contato?.errors?.['required']">O contato precisa ser preenchido.</span>
+          </div>
+        </div> -->
+
+        <div class="form-group mb-3 position-relative">
+          <label for="departamentoId" class="form-label">Contato</label>
+          <ng-select formControlName="contatoId"
+          [ngClass]="(contatoId?.touched && contatoId?.invalid) ? 'is-invalid' :''"
+            [clearable]="false"
+            [searchable]="false">
+            <ng-option
+              *ngFor="let contato of (contatos$ | async)"
+              [value]="contato.id">
+              {{ contato.nome }}
+            </ng-option>
+           </ng-select>
+           <div class="invalid-tooltip" *ngIf="contatoId?.touched && contatoId?.invalid">
+            <span *ngIf="contatoId?.errors?.['required']">O contato precisa ser selecionado.</span>
           </div>
         </div>
 

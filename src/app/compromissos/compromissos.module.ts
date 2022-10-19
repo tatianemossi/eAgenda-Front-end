@@ -10,6 +10,7 @@ import { FormsCompromissoResolver } from './services/forms-compromisso.resolver'
 import { VisualizarCompromissoResolver } from './services/visualizar-compromisso.resolver';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ContatoService } from '../contatos/services/contato.service';
 
 
 @NgModule({
@@ -24,6 +25,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ReactiveFormsModule,
     NgSelectModule
   ],
-  providers: [CompromissoService, FormsCompromissoResolver, VisualizarCompromissoResolver]
+  providers: [CompromissoService, FormsCompromissoResolver, VisualizarCompromissoResolver, ContatoService]
 })
 export class CompromissosModule { }
